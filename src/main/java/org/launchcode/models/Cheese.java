@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * Created by LaunchCode
  */
-@Entity
+@Entity //maps class to relational database table (perisstent)
 public class Cheese {
 
-    @Id
-    @GeneratedValue
+    @Id //sets a primary key in the database
+    @GeneratedValue //value generated for use
     private int id;
 
     @NotNull
@@ -23,7 +23,7 @@ public class Cheese {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    @ManyToOne
+    @ManyToOne //many cheeses in each category
     private Category category;
 
    /* private CheeseType type; */

@@ -50,14 +50,16 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
-                                       Errors errors, @RequestParam int categoryId, Model model) {
+                                       Errors errors,
+                                       @RequestParam int categoryId,
+                                       Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
             model.addAttribute("categories", categoryDao.findAll());
+            model.addAttribute("title", "Add Cheese");
             return "cheese/add";
         }
-        Cheese cat = categoryDao.findOne(categoryId);
+        Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
         return "redirect:";
@@ -76,11 +78,11 @@ public class CheeseController {
         for (int id : ids) {
             cheeseDao.delete(id);
         }
-
         return "redirect:";
     }
+
     @RequestMapping(value = "category", method = RequestMethod.GET)
-    public String category(Model model, @RequestParam int id) {
+    public String categories(Model model, @RequestParam int id) {
 
         Category cat = categoryDao.findOne(id);
         List<Cheese> cheeses = cat.getCheeses();

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class Category {
+
     @Id
     @GeneratedValue
     private int id;
@@ -16,8 +17,8 @@ public class Category {
     @Size(min = 3, max = 15)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "category_id")
+    @OneToMany //each category can have many cheeses
+    @JoinColumn(name = "category_id") //used to determine which cheese belongs to given category
     private List<Cheese> cheeses = new ArrayList<>();
 
     public Category() {
@@ -26,9 +27,15 @@ public class Category {
     public Category(String name) {
         this.name = name;
     }
+
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
