@@ -14,23 +14,21 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("category")
-
 public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-
-        model.addAttribute("cheeses", categoryDao.findAll());
         model.addAttribute("title", "Categories");
-
+        model.addAttribute("categories", categoryDao.findAll());
         return "category/index";
     }
+
     @RequestMapping(value="add", method = RequestMethod.GET)
     public String displayCategory(Model model) {
         model.addAttribute(new Category());
-
+        model.addAttribute("title", "Add Category");
         return "/category/add";
     }
 
@@ -39,15 +37,13 @@ public class CategoryController {
                       @ModelAttribute @Valid Category category,
                       Errors errors) {
         if (errors.hasErrors()) {
-            model.addAttribute("categories", categoryDao.findAll());
-            model.addAttribute("title", "Add Cheese");
             return "category/add";
         }
-        Category cat = categoryDao.save(category);
-        return "redirect:";
+        else {
+            categoryDao.save(category);
+            return "redirect:/category";
+        }
     }
-
-
 
 
 }
