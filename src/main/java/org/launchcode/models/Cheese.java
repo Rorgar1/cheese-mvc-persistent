@@ -26,7 +26,9 @@ public class Cheese {
     @ManyToOne //many cheeses in each category
     private Category category;
 
-   /* private CheeseType type; */
+    @ManyToMany(mappedBy = "cheeses")
+    private List<Menu> menus;
+
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -62,12 +64,6 @@ public class Cheese {
         this.category = category;
     }
 
-   /* public CheeseType getType() {
-        return type;
-    }
 
-    public void setType(CheeseType type) {
-        this.type = type;
-    } */
 
 }

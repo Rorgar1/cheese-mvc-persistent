@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("category")
+@RequestMapping(value="category")
 public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
