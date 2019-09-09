@@ -41,7 +41,7 @@ public class MenuController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Menu menu,
-                      Errors errors,) {
+                      Errors errors) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
@@ -77,7 +77,7 @@ public class MenuController {
     }
 
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm,
+    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form,
                           Errors errors) {
 
         if (errors.hasErrors()) {
@@ -88,6 +88,8 @@ public class MenuController {
         Menu theMenu = menuDao.findOne(form.getMenuId());
         theMenu.addItem(theCheese);
         menuDao.save(theMenu);
+
+        return "redirect:/menu/view/" + theMenu.getId();
     }
 
 

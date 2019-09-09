@@ -5,7 +5,8 @@
     <body class="container">
         <h1 th:text="${title}">Default Title</h1>
         <nav th:replace="fragments :: navigation"></nav>
-
+<br>
+        <p th:unless="${items} and ${items.size()}">No Menus</p>
         <ul>
             <li th:each="menu : ${menus}">
                 <a th:href="'/menu/view/' + ${menu.id}" th:text="${menu.name}"></a>
