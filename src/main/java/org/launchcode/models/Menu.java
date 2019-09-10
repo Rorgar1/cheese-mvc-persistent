@@ -24,6 +24,10 @@ public class Menu {
 
     public Menu() { }
 
+    public Menu(String name) {
+        this.name = name;
+    }
+
     public void addition(Cheese item) { cheeses.add(item); }
 
     public int getId() { return id; }

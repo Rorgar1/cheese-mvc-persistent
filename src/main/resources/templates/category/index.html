@@ -11,7 +11,8 @@
 
 
 <ul>
-    <li th:each="category: ${categories}" th:text="${category.name}"></li>
+    <li th:each="category: ${categories}"
+        th:text="${category.getName()}"></li>
 </ul>
 
 <a th:href="/category/add/">Add Category</a>
