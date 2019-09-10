@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value="menu")
+@RequestMapping("menu")
 public class MenuController {
     @Autowired
-    MenuDao menuDao;
+    private MenuDao menuDao;
 
     @Autowired
-    CheeseDao cheeseDao;
+    private CheeseDao cheeseDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("title", "Menus");
-        model.addAttribute("menus", menuDao.findAll());
+        model.addAttribute("title", "Menu");
+        model.addAttribute("menu", menuDao.findAll());
         return "menu/index";
     }
 

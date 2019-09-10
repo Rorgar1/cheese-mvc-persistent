@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by LaunchCode
  */
-@Entity //maps class to relational database table (perisstent)
+@Entity //maps class to relational database table (perisistant)
 public class Cheese {
 
     @Id //sets a primary key in the database
@@ -56,6 +56,7 @@ public class Cheese {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Category getCategory() {
         return category;
     }

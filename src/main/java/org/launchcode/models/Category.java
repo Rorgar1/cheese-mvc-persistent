@@ -20,10 +20,15 @@ public class Category {
     @OneToMany //each category can have many cheeses
     @JoinColumn(name = "category_id") //used to determine which cheese belongs to given category
     private List<Cheese> cheeses = new ArrayList<>();
+    public List<Cheese> getCheeses() {
+        return cheeses;
+    }
+    public void setCheeses(List<Cheese> cheeses) {
+        this.cheeses = cheeses;
+    }
 
     public Category() {
     }
-
     public Category(String name) {
         this.name = name;
     }
@@ -32,18 +37,13 @@ public class Category {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
     }
-    public List<Cheese> getCheeses() {
-        return cheeses;
-    }
+
+
 }
 

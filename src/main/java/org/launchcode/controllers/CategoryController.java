@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value="category")
+@RequestMapping("category")
 public class CategoryController {
+
     @Autowired
     private CategoryDao categoryDao;
 
@@ -26,10 +27,10 @@ public class CategoryController {
     }
 
     @RequestMapping(value="add", method = RequestMethod.GET)
-    public String displayCategory(Model model) {
+    public String add(Model model) {
         model.addAttribute(new Category());
         model.addAttribute("title", "Add Category");
-        return "/category/add";
+        return "category/add";
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
@@ -37,11 +38,12 @@ public class CategoryController {
                       @ModelAttribute @Valid Category category,
                       Errors errors) {
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Category");
             return "category/add";
         }
         else {
             categoryDao.save(category);
-            return "redirect:/category";
+            return "redirect:";
         }
     }
 
