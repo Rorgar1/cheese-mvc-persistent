@@ -2,6 +2,7 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
+import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
 import org.launchcode.models.forms.AddMenuItemForm;
@@ -19,11 +20,15 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("menu")
 public class MenuController {
+
     @Autowired
     private MenuDao menuDao;
 
     @Autowired
     private CheeseDao cheeseDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {

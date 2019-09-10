@@ -2,6 +2,8 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.data.CategoryDao;
+import org.launchcode.models.data.CheeseDao;
+import org.launchcode.models.data.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
+
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "Categories");
@@ -30,7 +33,7 @@ public class CategoryController {
     public String add(Model model) {
         model.addAttribute(new Category());
         model.addAttribute("title", "Add Category");
-        return "category/add";
+        return "/category/add";
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
