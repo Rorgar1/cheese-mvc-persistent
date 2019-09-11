@@ -14,33 +14,23 @@ public class Category {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 15)
+    @Size(min=3, max=15)
     private String name;
 
-    @OneToMany //each category can have many cheeses
-    @JoinColumn(name = "category_id") //used to determine which cheese belongs to given category
+    @OneToMany
+    @JoinColumn(name = "category_id")
     private List<Cheese> cheeses = new ArrayList<>();
 
-    public Category() {
-    }
-    public Category(String name) {
-        this.name = name;
-    }
+    public Category() { }
 
-    public int getId() {
-        return id;
-    }
+    public Category(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int getId() { return id;}
 
-    public List<Cheese> getCheeses() {
-        return cheeses;
-    }
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public List<Cheese> getCheeses() { return cheeses; }
 
 }
-

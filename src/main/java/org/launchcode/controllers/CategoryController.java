@@ -1,5 +1,6 @@
 package org.launchcode.controllers;
 
+
 import org.launchcode.models.Category;
 import org.launchcode.models.data.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,7 @@ import javax.validation.Valid;
 public class CategoryController {
 
     @Autowired
-    private CategoryDao categoryDao;
-
+    CategoryDao categoryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model, @RequestParam(defaultValue = "0") int id) {
@@ -27,27 +27,22 @@ public class CategoryController {
         model.addAttribute("categories", categoryDao.findAll());
         return "category/index";
     }
-
-    @RequestMapping(value="add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute(new Category());
         model.addAttribute("title", "Add Category");
-        return "/category/add";
+        return "category/add";
     }
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String add(Model model, @ModelAttribute @Valid Category category, Errors errors) {
 
-    @RequestMapping(value="add", method = RequestMethod.POST)
-    public String add(Model model,
-                      @ModelAttribute @Valid Category category,
-                      Errors errors) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Category");
             return "category/add";
         }
-        else {
-            categoryDao.save(category);
-            return "redirect:";
-        }
-    }
 
+        categoryDao.save(category);
+        return "redirect:";
+    }
 
 }
