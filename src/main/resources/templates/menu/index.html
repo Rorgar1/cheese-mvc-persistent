@@ -6,7 +6,7 @@
         <h1 th:text="${title}">Default Title</h1>
         <nav th:replace="fragments :: navigation"></nav>
 
-        <p th:unless="${menus} and ${menus.size()}">No Menus</p>
+        <p th:unless="${menus} and ${menus.size()}"><i>No Menus</i></p>
 
         <ul>
             <li th:each="menu : ${menus}">
@@ -14,7 +14,7 @@
             </li>
         </ul>
 
-        <p><a href="/menu/add">Add Menu</a></p>
+        <p><a href="/'menu/add'">Add Menu</a></p>
 
 
 </body>
