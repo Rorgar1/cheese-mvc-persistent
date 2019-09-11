@@ -2,7 +2,6 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
-import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
 import org.launchcode.models.forms.AddMenuItemForm;
@@ -27,11 +26,10 @@ public class MenuController {
     @Autowired
     private CheeseDao cheeseDao;
 
-
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("title", "Menus");
-        model.addAttribute("menu", menuDao.findAll());
+        model.addAttribute("menus", menuDao.findAll());
         return "menu/index";
     }
 
@@ -54,12 +52,13 @@ public class MenuController {
         return "redirect:view/" + menu.getId();
     }
 
-    @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @PathVariable int id) {
+    @RequestMapping(value = "view/{menuId}", method = RequestMethod.GET)
+    public String viewMenu(Model model, @PathVariable int menuId) {
 
-        Menu menu = menuDao.findOne(id);
+        Menu menu = menuDao.findOne(menuId);
         model.addAttribute("title", menu.getName());
-        model.addAttribute("menuId", menu);
+        model.addAttribute("cheeses", menu.getCheeses());
+        model.addAttribute("menuId", menu.getId());
 
         return "menu/view";
     }
@@ -69,24 +68,27 @@ public class MenuController {
 
         Menu menu = menuDao.findOne(menuId);
 
-        AddMenuItemForm itemForm = new AddMenuItemForm(cheeseDao.findAll(), menu);
+        AddMenuItemForm form = new AddMenuItemForm(
+                cheeseDao.findAll(),
+                menu);
 
         model.addAttribute("title", "Add item to menu: " + menu.getName());
-        model.addAttribute("form", itemForm);
+        model.addAttribute("form", form);
+
         return "menu/add-item";
     }
 
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm itemForm,
-                          Errors errors, @PathVariable int menuId) {
+    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form,
+                          Errors errors) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Item");
-            return "menu/add-item" + menuId;
+            model.addAttribute("form", form);
+            return "menu/add-item";
         }
 
-        Cheese theCheese = cheeseDao.findOne(itemForm.getCheeseId());
-        Menu theMenu = menuDao.findOne(itemForm.getMenuId());
+        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
+        Menu theMenu = menuDao.findOne(form.getMenuId());
         theMenu.addItem(theCheese);
         menuDao.save(theMenu);
 

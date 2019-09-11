@@ -78,10 +78,10 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+    public String processRemoveCheeseForm(@RequestParam int[] ids) {
 
-        for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+        for (int id : ids) {
+            cheeseDao.delete(id);
         }
         return "redirect:";
     }
@@ -89,10 +89,10 @@ public class CheeseController {
     @RequestMapping(value = "category", method = RequestMethod.GET)
     public String category(Model model, @RequestParam int id) {
 
-        Category category = categoryDao.findOne(id);
-        List<Cheese> cheeses = category.getCheeses();
+        Category cat = categoryDao.findOne(id);
+        List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses", cheeses);
-        model.addAttribute("title", "Cheeses in Category " + category.getName());
+        model.addAttribute("title", "Cheeses in Category " + cat.getName());
         return "cheese/index";
 
     }

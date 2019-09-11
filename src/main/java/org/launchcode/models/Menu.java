@@ -24,11 +24,7 @@ public class Menu {
 
     public Menu() { }
 
-    public Menu(String name) {
-        this.name = name;
-    }
-
-    public void addition(Cheese item) { cheeses.add(item); }
+    public void addItem(Cheese item) { cheeses.add(item); }
 
     public int getId() { return id; }
 
@@ -38,6 +34,5 @@ public class Menu {
 
     public List<Cheese> getCheeses() { return cheeses; }
 
-    public void addItem(Cheese item) { cheeses.add(item); }
 
 }

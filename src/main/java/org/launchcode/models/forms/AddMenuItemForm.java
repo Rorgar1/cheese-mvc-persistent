@@ -42,9 +42,6 @@ public class AddMenuItemForm {
     public Iterable<Cheese> getCheeses() {
         return cheeses;
     }
-    public void setCheeses(Iterable<Cheese> cheeses) {
-        this.cheeses = cheeses;
-    }
 
     public Menu getMenu() {
         return menu;
